@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>List of cities</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <h1 align="center">Города и население</h1><br>
+
+        {% load django_tables2 %}
+        {% for table in tables %}
+            <h3 style="margin-left: 20px">{{ table.prefix }}</h3>
+            {% render_table table %}
+        {% endfor %}
+    </body>
+</html>
