@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>List of cities</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    </head>
-    <body>
-        <h1 align="center">Города и население</h1><br>
+{% extends "base_template.html" %}
 
-        {% load django_tables2 %}
+{% block content %}
+    {% load django_tables2 %}
+    {% if request.user.is_authenticated %}
+        <nav class="navigation">
+            <div align="right" style="margin-right: 20px">
+                Текущий пользователь: {{ request.user }} | <a href="/logout/">Выйти</a>
+            </div>
+        </nav>
+    {% endif %}
+    <h1 align="center">Города и население</h1><br>
+
+    {% if tables %}
         {% for table in tables %}
             <h3 style="margin-left: 20px">{{ table.prefix }}</h3>
             {% render_table table %}
         {% endfor %}
-    </body>
-</html>
+    {% else %}
+        <p style="margin-left: 20px">
+            <em>В базе данных пока нет ниодного города.<br>
+            Добавьте континенты, страны и соответствующие им города в административной панели проекта.</em>
+        </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    {% for e in form.non_field_errors %}
+        <div class="alert alert-danger">{{ e }}</div>
+    {% endfor %}
+    <h4 align="center" style="margin-top: 20px">Регистрация</h4>
+    <p align="center">
+        <small>Уже есть аккаунт? <a href="/login/">Вход</a></small>
+    </p>
+    <form class="form-horizontal" method="post" action="">
+        {% csrf_token %}
+        <fieldset>
+            {% for field in form %}
+                <div class="control-group {% if field.errors %}has-error{% endif %}" align="center">
+                    <label class="control-label" style="margin-top: 10px; margin-bottom: 5px">{{ field.label }}</label>
+                    <div class="controls">{{ field }}</div>
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div class="form-actions" align="center" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </div>
+    </form>
+{% endblock %}

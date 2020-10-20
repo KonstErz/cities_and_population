@@ -3,6 +3,10 @@ import django_tables2 as tables
 
 
 class CityTable(tables.Table):
+    """
+    A Table to represent the City model with according columns.
+    Automatic row numbering starting at 1.
+    """
 
     row_number = tables.Column(verbose_name='#', empty_values=(),
                                orderable=False)
