@@ -17,8 +17,10 @@ class ContinentAdmin(admin.ModelAdmin):
     """
     Administration object for Continent models.
     Adds inline addition of cities in continent view (inlines).
+    Active search box on the list page by the field 'name'.
     """
 
+    search_fields = ['name']
     inlines = [CityInline]
 
 
@@ -27,8 +29,10 @@ class CountryAdmin(admin.ModelAdmin):
     """
     Administration object for Country models.
     Adds inline addition of cities in country view (inlines).
+    Active search box on the list page by the field 'name'.
     """
 
+    search_fields = ['name']
     inlines = [CityInline]
 
 
@@ -40,7 +44,9 @@ class CityAdmin(admin.ModelAdmin):
         - fields to be displayed in list view (list_display)
         - grouping fields horizontally with the ability to sort by field
         - adds cities filters by country and continent
+        - search box on the list page by fields: name, country and continent
     """
 
     list_display = ('name', 'country', 'continent', 'population')
     list_filter = ('country', 'continent')
+    search_fields = ['name', 'country__name', 'continent__name']

@@ -19,3 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # copy project
 COPY . .
+
+# listens on the specified network port
+EXPOSE 8080
+
+# default command
+CMD ['gunicorn', 'cnp.wsgi:application', '--bind', '0.0.0.0:8080']

@@ -13,12 +13,13 @@ def city_list(request):
     """
     The Controller prepares tables for displaying a list of cities as tables.
     For authorized users only.
+    The table uses pagination of 5 records per page.
     :param request: HttpRequest object
     :return: HttpResponse object returned as a result of calling render()
     function with passed arguments (html document with city tables)
     """
 
-    config = RequestConfig(request)
+    config = RequestConfig(request, paginate={"per_page": 5})
     continents = Continent.objects.all().order_by('name')
     tables = [CityTable(City.objects.filter(continent=continent),
                         prefix=continent.name) for continent in continents]

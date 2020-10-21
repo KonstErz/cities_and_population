@@ -1,16 +1,27 @@
 version: '3.8'
 
 services:
+    nginx:
+        build: ./nginx
+        ports:
+            - 1337:80
+        depends_on:
+            - cnp
+        volumes:
+            - ./static/:/usr/src/app/static/
+        networks:
+            - net_inner
+
     cnp:
         build: ./cnp_project
         restart: always
         entrypoint:
             - /usr/src/app/entrypoint-project.sh
-        command: python3 manage.py runserver 0.0.0.0:8000
+        command: ['gunicorn', 'cnp.wsgi:application', '--bind', '0.0.0.0:8080']
         volumes:
-            - ./cnp_project/:/usr/src/app/
-        ports:
-            - 8000:8000
+            - ./static/:/usr/src/app/staticfiles/
+        expose:
+            - 8080
         env_file:
             - ./env.project
         depends_on:
@@ -22,14 +33,11 @@ services:
         image: postgres:12.0-alpine
         restart: always
         volumes:
-            - postgres_data:/var/lib/postgresql/data/
+            - ./postgres-data/:/var/lib/postgresql/data/
         env_file:
             - ./env.db
         networks:
             - net_inner
-
-volumes:
-    postgres_data:
 
 networks:
     net_inner:

@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# static files
+static/
+
+# Docker volumes
+postgres-data/
