@@ -5,6 +5,7 @@ import django_tables2 as tables
 class CityTable(tables.Table):
     """
     A Table to represent the City model with according columns.
+    The ability to sort the table by city name and population is preserved.
     Automatic row numbering starting at 1.
     """
 
