@@ -46,11 +46,12 @@
 3. Переход на главную страницу http://localhost:8000/ или в админ. панель http://localhost:8000/admin/
 
 4. Завершение работы:  
-    
+
+    ```
     docker-compose down -v   # Удалить все тома вместе с контейнерами
     docker images       # Вывод списка всех запущенных образов
     docker images -a    # Вывод списка всех доступных образов
     docker rmi <Image_ID>    # Удаление конкретного образа по ID
     docker rmi $(docker images -f dangling=true -q)    # Удаление всех образов, не помеченных тэгами
     docker rmi $(docker images -a -q)    # Удаление всех образов
-    
+    ```
